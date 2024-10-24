@@ -1,8 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCondition : MonoBehaviour
+public interface IDamageIbe
+{
+    void TakePhysicalDamage(int damage);
+}
+
+public class PlayerCondition : MonoBehaviour, IDamageIbe
 {
     public UICondition condition;
 
@@ -11,6 +17,8 @@ public class PlayerCondition : MonoBehaviour
     Condition stamina { get { return condition.stamina; } }
 
     public float noHungerHealth;
+
+    public event Action onTakeDamage;
 
     // Update is called once per frame
     void Update()
@@ -42,5 +50,11 @@ public class PlayerCondition : MonoBehaviour
     public void Die()
     {
         Debug.Log("Die");
+    }
+
+    public void TakePhysicalDamage(int damage)
+    {
+        health.Subtract(damage);
+        onTakeDamage?.Invoke();
     }
 }

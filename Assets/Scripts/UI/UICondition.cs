@@ -11,6 +11,6 @@ public class UICondition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CharacterManger.Instance.Player.condition.condition = this;
+        CharacterManager.Instance.Player.condition.condition = this;
     }
 }
