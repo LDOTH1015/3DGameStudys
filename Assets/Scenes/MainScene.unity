@@ -189,7 +189,6 @@ GameObject:
   m_Component:
   - component: {fileID: 83494814}
   - component: {fileID: 83494816}
-  - component: {fileID: 83494817}
   - component: {fileID: 83494815}
   m_Layer: 5
   m_Name: Icon
@@ -255,23 +254,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83494813}
   m_CullTransparentMesh: 1
---- !u!114 &83494817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83494813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92186ae6303fb8a438f8982d0f52a867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curValue: 0
-  startValue: 0
-  maxValue: 0
-  passiveValue: 0
-  uiBar: {fileID: 0}
 --- !u!1 &101985310
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +268,7 @@ GameObject:
   - component: {fileID: 101985312}
   - component: {fileID: 101985316}
   - component: {fileID: 101985315}
+  - component: {fileID: 101985317}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -483,6 +466,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  condition: {fileID: 0}
+--- !u!114 &101985317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101985310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4afe732fb0b3149a6086850f7c1c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  condition: {fileID: 0}
+  noHungerHealth: 2
 --- !u!1 &161581432
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +768,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47788a48952ed3a4cb7536e9aecbe957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 1365595475}
+  hunger: {fileID: 1931819375}
+  stamina: {fileID: 981175815}
 --- !u!1 &677113471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,9 +1210,9 @@ RectTransform:
   - {fileID: 866816570}
   m_Father: {fileID: 303571300}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -182.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 350, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &981175813
@@ -1265,10 +1266,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curValue: 0
-  startValue: 0
-  maxValue: 0
-  passiveValue: 0
-  uiBar: {fileID: 0}
+  startValue: 100
+  maxValue: 100
+  passiveValue: 5
+  uiBar: {fileID: 866816571}
 --- !u!1 &1200428283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,9 +1380,9 @@ RectTransform:
   - {fileID: 161581433}
   m_Father: {fileID: 303571300}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -32.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 350, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1365595473
@@ -1435,10 +1436,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curValue: 0
-  startValue: 0
-  maxValue: 0
-  passiveValue: 0
-  uiBar: {fileID: 0}
+  startValue: 100
+  maxValue: 100
+  passiveValue: 1
+  uiBar: {fileID: 161581434}
 --- !u!1 &1663466138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,9 +1550,9 @@ RectTransform:
   - {fileID: 1663466139}
   m_Father: {fileID: 303571300}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -107.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 350, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1931819373
@@ -1605,10 +1606,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curValue: 0
-  startValue: 0
-  maxValue: 0
-  passiveValue: 0
-  uiBar: {fileID: 0}
+  startValue: 400
+  maxValue: 500
+  passiveValue: 20
+  uiBar: {fileID: 1663466140}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

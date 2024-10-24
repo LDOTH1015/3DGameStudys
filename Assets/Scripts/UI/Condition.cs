@@ -19,6 +19,16 @@ public class Condition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        uiBar.fillAmount = curValue / maxValue;
+    }
+
+    public void Add(float value)
+    {
+        curValue = Mathf.Min(curValue + value, maxValue);
+    }
+
+    public void Subtract(float value)
+    {
+        curValue = Mathf.Max(curValue - value, 0);
     }
 }
