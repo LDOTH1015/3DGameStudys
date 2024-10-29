@@ -1,9 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public interface IForcingJump
+{
+    void ForcingJump(int Jump);
+}
+
+
+public class PlayerController : MonoBehaviour , IForcingJump
 {
     [Header("Move")]
     public float moveSpeed;
@@ -20,6 +27,9 @@ public class PlayerController : MonoBehaviour
     private float camCurXRot;
     public float lookSensitivity;
     private Vector2 mouseDelta;
+    public bool canLook = true;
+
+    public Action inventory;
 
     private void Awake()
     {
@@ -39,7 +49,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        CameraLook();
+        if (canLook)
+        {
+            CameraLook();
+        }
     }
 
     private void Move()
@@ -104,5 +117,26 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            inventory?.Invoke();
+            ToggleCursor();
+        }
+    }
+
+    void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
+    }
+
+    public void ForcingJump(int Jump)
+    {
+        rigidbody.AddForce(Vector2.up * Jump, ForceMode.Impulse);
     }
 }
