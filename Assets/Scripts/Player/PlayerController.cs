@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour , IForcingJump
     public LayerMask groundLayerMask;
 
     private Rigidbody rigidbody;
-    private bool isMoving = false;
 
     [Header("Look")]
     public Transform cameraContainer;
@@ -45,17 +44,7 @@ public class PlayerController : MonoBehaviour , IForcingJump
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (CharacterManager.Instance.Player.condition.StaminaCheck() > 10.0f && isMoving)
-        {
-            Move();
-            if (isMoving)
-            {
-                CharacterManager.Instance.Player.condition.UseStamina();
-            }
-        } else
-        {
-            isMoving = false;
-        }
+        Move();
     }
 
     private void LateUpdate()
@@ -88,13 +77,10 @@ public class PlayerController : MonoBehaviour , IForcingJump
         if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
-            isMoving = true;
-            
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             curMovementInput = Vector2.zero;
-            isMoving = false;
         }
     }
 
@@ -105,8 +91,9 @@ public class PlayerController : MonoBehaviour , IForcingJump
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && IsGrounded())
+        if (context.phase == InputActionPhase.Started && IsGrounded() && CharacterManager.Instance.Player.condition.StaminaCheck() > 10.0f)
         {
+            CharacterManager.Instance.Player.condition.UseStamina();
             rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
         }
     }
