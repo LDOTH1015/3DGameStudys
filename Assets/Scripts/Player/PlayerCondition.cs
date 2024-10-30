@@ -47,6 +47,16 @@ public class PlayerCondition : MonoBehaviour, IDamageIbe
         hunger.Add(amout);
     }
 
+    public void UseStamina()
+    {
+        stamina.Subtract(stamina.passiveValue * 0.05f);
+    }
+
+    public float StaminaCheck()
+    {
+        return stamina.curValue;
+    }
+
     public void Die()
     {
         Debug.Log("Die");
