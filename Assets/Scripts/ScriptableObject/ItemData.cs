@@ -37,4 +37,6 @@ public class ItemData : ScriptableObject
     public int maxStackAmount;
     [Header("Consumable")]
     public ItemDataConsumable[] consumable;
+    [Header("Equip")]
+    public GameObject equipPrefab;
 }
